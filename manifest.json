@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Markdown Reviewer",
+  "version": "1.0.0",
+  "description": "Preview and edit Markdown in Firefox, including selected text and Markdown links.",
+  "permissions": ["menus", "storage"],
+  "optional_host_permissions": ["http://*/*", "https://*/*"],
+  "background": { "scripts": ["background.js"] },
+  "action": { "default_title": "Open Markdown Reviewer" },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "markdown-reviewer@spanijel.github.io",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": { "required": ["none"] }
+    }
+  }
+}

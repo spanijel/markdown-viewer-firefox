@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Markdown Reviewer</title>
+  <link rel="stylesheet" href="reviewer.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="brand">
+        <h1>Markdown Reviewer</h1>
+        <div class="file-name" id="fileName">No file loaded</div>
+      </div>
+      <div class="toolbar">
+        <label class="button primary" for="fileInput" title="Open a Markdown file">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3v12m0-12 4 4m-4-4-4 4M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Open
+        </label>
+        <input id="fileInput" type="file" accept=".md,.markdown,.txt,text/markdown,text/plain">
+        <button class="button" id="copyHtml" type="button" title="Copy rendered HTML">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="9" y="9" width="11" height="11" rx="2" stroke="currentColor" stroke-width="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          Copy HTML
+        </button>
+        <button class="button" id="downloadHtml" type="button" title="Download rendered HTML">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          HTML
+        </button>
+        <button class="button" id="exportPdf" type="button" title="Export the rendered preview as PDF">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M14 2v6h6M8 16h8M8 12h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          PDF
+        </button>
+        <button class="toggle" id="previewOnly" type="button" aria-pressed="true" title="Toggle preview-only mode">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" stroke="currentColor" stroke-width="2"/>
+            <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          Preview
+        </button>
+      </div>
+    </header>
+
+    <main class="preview-only">
+      <section class="pane hidden" id="editorPane">
+        <div class="pane-title">Markdown</div>
+        <textarea id="editor" spellcheck="false"># Markdown Reviewer
+
+Open a `.md` file or drag one onto this window.
+
+## What works
+
+- Headings, paragraphs, lists, quotes, links, images, code, horizontal rules
+- Fenced code blocks
+- Basic tables
+- Live side-by-side preview
+
+```js
+const message = "Edit Markdown on the left";
+console.log(message);
+```
+
+| Action | Result |
+| --- | --- |
+| Open | Load a local Markdown file |
+| Preview | Hide or show the editor |
+| HTML | Save the rendered HTML |
+| PDF | Open the print dialog for Save as PDF |
+</textarea>
+      </section>
+
+      <section class="pane">
+        <div class="pane-title">
+          <span>Preview</span>
+          <span id="wordCount">0 words</span>
+        </div>
+        <div class="preview-wrap">
+          <article class="preview" id="preview"></article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Drop a Markdown file anywhere in the window.</span>
+      <span id="status">Ready</span>
+    </footer>
+  </div>
+
+  <script src="reviewer.js"></script>
+</body>
+</html>
