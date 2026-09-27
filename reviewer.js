@@ -225,9 +225,44 @@
       return html.join("\n");
     }
 
+    function safePreviewNodes(html) {
+      const parsed = new DOMParser().parseFromString(html, "text/html");
+      const allowed = new Set([
+        "A", "BLOCKQUOTE", "CODE", "DEL", "EM", "H1", "H2", "H3", "H4", "H5", "H6", "HR", "IMG",
+        "LI", "OL", "P", "PRE", "STRONG", "TABLE", "TBODY", "TD", "TH", "THEAD", "TR", "UL"
+      ]);
+
+      function copy(node) {
+        if (node.nodeType === Node.TEXT_NODE) return document.createTextNode(node.textContent);
+        if (node.nodeType !== Node.ELEMENT_NODE || !allowed.has(node.tagName)) return document.createTextNode(node.textContent);
+        const element = document.createElement(node.tagName.toLowerCase());
+        if (node.tagName === "A") {
+          const href = safeUrl(node.getAttribute("href") || "", false);
+          if (href) {
+            element.href = href.replace(/&amp;/g, "&");
+            element.target = "_blank";
+            element.rel = "noreferrer";
+          }
+        } else if (node.tagName === "IMG") {
+          const src = safeUrl(node.getAttribute("src") || "", true);
+          if (src) element.src = src.replace(/&amp;/g, "&");
+          element.alt = node.getAttribute("alt") || "";
+        } else if (node.tagName === "CODE" && node.hasAttribute("data-language")) {
+          element.dataset.language = node.getAttribute("data-language");
+        }
+        if ((node.tagName === "A" || node.tagName === "IMG") && node.hasAttribute("title")) {
+          element.title = node.getAttribute("title");
+        }
+        for (const child of node.childNodes) element.appendChild(copy(child));
+        return element;
+      }
+
+      return Array.from(parsed.body.childNodes, copy);
+    }
+
     function update() {
       const markdown = editor.value;
-      preview.innerHTML = renderMarkdown(markdown);
+      preview.replaceChildren(...safePreviewNodes(renderMarkdown(markdown)));
       const words = markdown.trim() ? markdown.trim().split(/\s+/).length : 0;
       wordCount.textContent = `${words} ${words === 1 ? "word" : "words"}`;
     }

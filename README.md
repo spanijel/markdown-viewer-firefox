@@ -20,7 +20,7 @@ Test the toolbar button, a text selection, a link to a Markdown file, the file p
 From the repository root, create the upload archive:
 
 ```sh
-zip -9 markdown-reviewer-firefox-1.0.0.zip manifest.json background.js reviewer.html reviewer.css reviewer.js
+zip -9 markdown-reviewer-firefox-1.0.1.zip manifest.json background.js reviewer.html reviewer.css reviewer.js
 ```
 
 Upload that archive to [addons.mozilla.org/developers](https://addons.mozilla.org/developers/).
