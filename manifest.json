@@ -1,12 +1,24 @@
 {
   "manifest_version": 3,
   "name": "Markdown Reviewer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Preview and edit Markdown in Firefox, including selected text and Markdown links.",
   "permissions": ["menus", "storage"],
   "optional_host_permissions": ["http://*/*", "https://*/*"],
   "background": { "scripts": ["background.js"] },
-  "action": { "default_title": "Open Markdown Reviewer" },
+  "icons": {
+    "32": "icons/markdown-reviewer-32.png",
+    "64": "icons/markdown-reviewer-64.png",
+    "128": "icons/markdown-reviewer-128.png"
+  },
+  "action": {
+    "default_title": "Open Markdown Reviewer",
+    "default_icon": {
+      "32": "icons/markdown-reviewer-32.png",
+      "64": "icons/markdown-reviewer-64.png"
+    },
+    "default_area": "navbar"
+  },
   "browser_specific_settings": {
     "gecko": {
       "id": "markdown-reviewer@spanijel.github.io",

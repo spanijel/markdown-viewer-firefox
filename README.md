@@ -14,13 +14,15 @@ Images in Markdown can load from their source sites.
 
 Open `about:debugging` in Firefox, choose **This Firefox** and **Load Temporary Add-on**, then select `manifest.json` in this directory.
 Test the toolbar button, a text selection, a link to a Markdown file, the file picker, and drag and drop.
+The toolbar and Add-ons Manager use the same icon as the AMO listing.
+If an existing installation keeps the button in the Extensions menu, use its menu to select **Pin to Toolbar**.
 
 ## AMO submission
 
 From the repository root, create the upload archive:
 
 ```sh
-zip -9 markdown-reviewer-firefox-1.0.2.zip manifest.json background.js reviewer.html reviewer.css reviewer.js
+zip -9 -r markdown-reviewer-firefox-1.0.3.zip manifest.json background.js reviewer.html reviewer.css reviewer.js icons
 ```
 
 Upload that archive to [addons.mozilla.org/developers](https://addons.mozilla.org/developers/).
